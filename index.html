@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="https://th.tinderpressroom.com/download/Flame+Gradient+RGB.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อ่านทำไม</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --fire-orange: #ff6600;
+            --fire-red: #ff3300;
+            --fire-yellow: #ffcc00;
+            --dark-brown: #1a0500;
+            --navbar-height: 60px;
+        }
+        
+        body {
+            font-family: 'Noto Sans Thai', sans-serif;
+            background-color: var(--dark-brown);
+            color: #fff;
+            padding-top: var(--navbar-height);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(26, 5, 0, 0.95);
+            height: var(--navbar-height);
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--fire-orange);
+        }
+        
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+            color: var(--fire-orange);
+            margin-right: 8px;
+            filter: drop-shadow(0 0 8px rgba(255, 102, 0, 0.6));
+        }
+        
+        .logo-text {
+            font-family: 'Kanit', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, var(--fire-yellow), var(--fire-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .navbar-search {
+            position: relative;
+            margin-left: 20px;
+        }
+        
+        .search-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 8px 15px 8px 35px;
+            color: white;
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-size: 14px;
+            width: 220px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: var(--fire-orange);
+            outline: none;
+            width: 250px;
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+        
+        .navbar-center {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin: 0 15px;
+        }
+        
+        .nav-link {
+            font-family: 'Kanit', sans-serif;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--fire-orange);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--fire-orange), var(--fire-yellow));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--fire-orange);
+            background-color: rgba(255, 102, 0, 0.1);
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-button {
+            background: linear-gradient(135deg, var(--fire-orange) 0%, var(--fire-red) 100%);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-family: 'Kanit', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: 15px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+        }
+        
+        .nav-button:hover::before {
+            left: 100%;
+        }
+        
+        .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom right, var(--fire-orange), var(--fire-red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 20px;
+            cursor: pointer;
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .avatar:hover {
+            transform: scale(1.05);
+            border-color: var(--fire-orange);
+            box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+        }
+        
+        .avatar-icon {
+            font-size: 18px;
+            color: white;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--fire-red);
+            color: white;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Global Fire Effect Container */
+        .global-fire-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(to top, 
+                rgba(255, 30, 0, 0.7) 0%, 
+                rgba(255, 120, 0, 0.5) 30%, 
+                rgba(255, 180, 0, 0.3) 60%, 
+                transparent 100%);
+            z-index: 5;
+            transition: height 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+        }
+        
+        section {
+            min-height: 100vh;
+            width: 100%;
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            z-index: 20;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+        
+        .active .content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h1 {
+            font-family: 'Kanit', 'Noto Sans Thai', sans-serif;
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(255, 120, 0, 0.8), 0 0 30px rgba(255, 60, 0, 0.5);
+            background: linear-gradient(to right, #fff, #ffcc00, #ff6600);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+        }
+        
+        h2 {
+            font-family: 'Kanit', 'Noto Sans Thai', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-shadow: 0 0 12px rgba(255, 120, 0, 0.7);
+            background: linear-gradient(to right, #fff, #ffcc00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        p {
+            font-size: 1.6rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-weight: 400;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        
+        .highlight {
+            color: var(--fire-orange);
+            font-weight: 600;
+        }
+        
+        .fact-box {
+            background: linear-gradient(135deg, rgba(26, 5, 0, 0.9) 0%, rgba(51, 20, 0, 0.85) 100%);
+            border-left: 5px solid var(--fire-orange);
+            padding: 25px;
+            margin: 40px 0;
+            border-radius: 8px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .fact-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ff6600' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+        }
+        
+        .fact-box::after {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--fire-orange);
+            opacity: 0.3;
+        }
+        
+        .fact-box h3 {
+            color: var(--fire-yellow);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .fact-box h3::before {
+            content: '\f06a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: 10px;
+            color: var(--fire-orange);
+        }
+        
+        .fact-box p {
+            font-size: 1.3rem;
+            margin-bottom: 0;
+        }
+        
+        .fire-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            pointer-events: none;
+        }
+        
+        .smoke-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+            z-index: 1;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--fire-orange) 0%, var(--fire-red) 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.6rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 40px 0;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 5px 20px rgba(255, 102, 0, 0.4), 0 0 0 5px rgba(255, 102, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+        
+        .cta-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 51, 0, 0.6), 0 0 0 8px rgba(255, 102, 0, 0.2);
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .image-container {
+            width: 100%;
+            max-width: 700px;
+            height: 400px;
+            margin: 40px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+            transform: perspective(1000px) rotateY(0deg);
+            transition: transform 1.5s ease;
+        }
+        
+        .active .image-container {
+            transform: perspective(1000px) rotateY(3deg);
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s ease, filter 1.5s ease;
+        }
+        
+        .active .image-container img {
+            transform: scale(1.05);
+            filter: brightness(1.1) contrast(1.1);
+        }
+        
+        .image-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(26, 5, 0, 0.8), transparent);
+        }
+        
+        .statistic {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            margin: 10px;
+            background: rgba(26, 5, 0, 0.7);
+            border-radius: 10px;
+            flex: 1;
+            min-width: 180px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--fire-red), var(--fire-orange));
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--fire-orange);
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #ccc;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: calc(var(--navbar-height) + 10px);
+            left: 20px;
+            right: 20px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            z-index: 100;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--fire-orange), var(--fire-yellow));
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--fire-orange);
+        }
+        
+        .progress-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(26, 5, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .progress-ring {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .progress-ring-circle {
+            stroke: var(--fire-orange);
+            fill: transparent;
+            stroke-width: 4;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        #flame-icon {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            color: var(--fire-orange);
+            filter: drop-shadow(0 0 10px rgba(255, 102, 0, 0.7));
+            animation: flicker 2s infinite alternate;
+            z-index: 100;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 15px var(--fire-orange), 0 0 20px var(--fire-red);
+            }
+            20%, 24%, 55% {
+                opacity: 0.5;
+                text-shadow: none;
+            }
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: #fff;
+            text-align: center;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .scroll-indicator.hidden {
+            opacity: 0;
+        }
+        
+        .scroll-indicator p {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .scroll-arrow {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-15px);
+            }
+            60% {
+                transform: translateY(-7px);
+            }
+        }
+        
+        .ember {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: var(--fire-orange);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--fire-yellow), 0 0 20px var(--fire-orange);
+            animation: float-up linear both;
+            opacity: 0;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+                background-color: var(--fire-red);
+            }
+            50% {
+                background-color: var(--fire-orange);
+            }
+            100% {
+                transform: translateY(-100vh) translateX(var(--x-end)) rotate(var(--rotate-end));
+                opacity: 0;
+                background-color: var(--fire-yellow);
+            }
+        }
+        
+        .glow-overlay {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, rgba(255, 102, 0, 0.1) 0%, rgba(26, 5, 0, 0) 70%);
+            z-index: 3;
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 1024px) {
+            .navbar-center {
+                display: none;
+            }
+            
+            .navbar-search {
+                margin-left: auto;
+                margin-right: 15px;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                margin-right: 15px;
+            }
+            
+            .search-input {
+                width: 180px;
+            }
+            
+            .search-input:focus {
+                width: 200px;
+            }
+            
+            /* Mobile nav menu */
+            .nav-menu-mobile {
+                position: fixed;
+                top: var(--navbar-height);
+                left: 0;
+                width: 100%;
+                background-color: rgba(26, 5, 0, 0.95);
+                padding: 20px;
+                z-index: 999;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                border-bottom: 2px solid var(--fire-orange);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-menu-mobile.active {
+                transform: translateY(0);
+            }
+            
+            .nav-menu-mobile .nav-item {
+                margin: 15px 0;
+            }
+            
+            .nav-menu-mobile .nav-link {
+                display: block;
+                padding: 10px 15px;
+                font-size: 18px;
+                text-align: center;
+                border-radius: 8px;
+                background-color: rgba(255, 255, 255, 0.05);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 15px;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+            
+            .navbar-search {
+                display: none;
+            }
+            
+            .nav-button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .avatar {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .avatar-icon {
+                font-size: 16px;
+            }
+            
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            h2 {
+                font-size: 2.5rem;
+            }
+            
+            p {
+                font-size: 1.3rem;
+            }
+            
+            .fact-box h3 {
+                font-size: 1.5rem;
+            }
+            
+            .fact-box p {
+                font-size: 1.1rem;
+            }
+            
+            .image-container,
+            .video-placeholder {
+                height: 250px;
+            }
+            
+            .progress-container {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .progress-ring {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 1.3rem;
+            }
+            
+            .stat-item {
+                min-width: 140px;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+            
+            .navbar-right .nav-button:first-child {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <div class="navbar-logo">
+                <i class="fas fa-fire logo-icon"></i>
+                <div class="logo-text">ไฟป่า</div>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="navbar-search">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="ค้นหาข้อมูล...">
+            </div>
+        </div>
+        
+        <div class="navbar-center">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#section1" class="nav-link active">หน้าแรก</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#section2" class="nav-link">สาเหตุ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#section3" class="nav-link">ผลกระทบ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#section4" class="nav-link">พื้นที่เสี่ยง</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#section5" class="nav-link">การป้องกัน</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#section6" class="<a href="#section6" class="nav-link">ติดต่อ</a>
+                  </li>
+              </ul>
+          </div>
+          
+          <div class="navbar-right">
+              <button class="nav-button">เกี่ยวกับ</button>
+              <button class="nav-button">เริ่มเรียนรู้</button>
+              <div class="avatar">
+                  <i class="fas fa-user avatar-icon"></i>
+                  <div class="notification-badge">2</div>
+              </div>
+          </div>
+      </nav>
+      
+      <!-- Progress Indicator -->
+      <div class="progress-indicator">
+          <div class="progress-bar" id="progressBar"></div>
+      </div>
+      
+      <!-- Scroll Progress Circle -->
+      <div class="progress-container">
+        <div class="progress-ring">
+            <svg width="50" height="50">
+                <circle class="progress-ring-circle" stroke="orange" r="20" cx="25" cy="25"/>
+            </svg>
+            <div class="progress-text">0%</div>
+        </div>
+    </div>
+    
+
+      <!-- Visual Effects -->
+      <div class="smoke-overlay"></div>
+      <div class="glow-overlay"></div>
+      <div class="global-fire-container" id="fireContainer"></div>
+      <div class="fire-particles" id="fireParticles"></div>
+      
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator" id="scrollIndicator">
+          <p>เลื่อนลงเพื่อเรียนรู้เพิ่มเติม</p>
+          <i class="fas fa-chevron-down scroll-arrow"></i>
+      </div>
+      
+      <!-- Section 1: Introduction -->
+      <section id="section1" class="active">
+          <div class="content">
+              <h1>ไฟป่าคืออะไร?</h1>
+              <p>ไฟป่า คือ <span class="highlight">ไฟที่เกิดขึ้นในพื้นที่ป่า</span> โดยมีสาเหตุมาจากธรรมชาติหรือมนุษย์ ซึ่งก่อให้เกิดการเผาไหม้พืชพรรณ ไม้ ใบไม้ หญ้า และวัสดุอินทรีย์ ทำให้เกิดผลกระทบต่อระบบนิเวศ สิ่งแวดล้อม และสุขภาพของมนุษย์</p>
+              
+              <div class="image-container">
+                  <img src="https://images.pexels.com/photos/3552472/pexels-photo-3552472.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="ภาพไฟป่า" />
+              </div>
+              
+              <div class="fact-box">
+                  <h3>ข้อเท็จจริงที่น่าสนใจ</h3>
+                  <p>ไฟป่าในประเทศไทยส่วนใหญ่เกิดจากการกระทำของมนุษย์ โดยมากกว่า 90% ของไฟป่าเกี่ยวข้องกับกิจกรรมของมนุษย์ เช่น การเผาเพื่อเตรียมพื้นที่เกษตร การล่าสัตว์ หรือการเผาเก็บของป่า</p>
+              </div>
+              
+              <div class="statistic">
+                  <div class="stat-item">
+                      <div class="stat-value">2.5 ล้าน</div>
+                      <div class="stat-label">ไร่ที่ถูกไฟป่าทำลายในปี 2024</div>
+                  </div>
+                  <div class="stat-item">
+                      <div class="stat-value">90%</div>
+                      <div class="stat-label">เกิดจากการกระทำของมนุษย์</div>
+                  </div>
+                  <div class="stat-item">
+                      <div class="stat-value">65%</div>
+                      <div class="stat-label">เกิดในช่วงฤดูแล้ง</div>
+                  </div>
+              </div>
+              
+              <button class="cta-button">เรียนรู้เพิ่มเติม</button>
+          </div>
+      </section>
+      
+      <!-- Section 2: Causes -->
+      <section id="section2">
+          <div class="content">
+              <h2>สาเหตุของไฟป่า</h2>
+              <p>สาเหตุของไฟป่าสามารถแบ่งออกเป็น 2 ประเภทหลัก คือ <span class="highlight">สาเหตุจากธรรมชาติ</span> และ <span class="highlight">สาเหตุจากมนุษย์</span> ซึ่งในประเทศไทยนั้น การกระทำของมนุษย์เป็นสาเหตุหลักของการเกิดไฟป่าในแต่ละปี</p>
+              
+              <div class="image-container">
+                  <img src="https://images.pexels.com/photos/948270/pexels-photo-948270.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="สาเหตุของไฟป่า" />
+              </div>
+              
+              <div class="fact-box">
+                  <h3>สาเหตุจากธรรมชาติ</h3>
+                  <p>ฟ้าผ่า ลูกไฟจากภูเขาไฟ การเสียดสีของกิ่งไม้แห้ง ความร้อนสะสมจากซากพืชที่ทับถมกัน และการกระทำของสัตว์บางชนิด เป็นสาเหตุธรรมชาติที่ทำให้เกิดไฟป่า แต่พบได้น้อยมากในประเทศไทย</p>
+              </div>
+              
+              <div class="fact-box">
+                  <h3>สาเหตุจากมนุษย์</h3>
+                  <p>การเผาเพื่อเตรียมพื้นที่เกษตร การเผาเพื่อล่าสัตว์ การเผาเพื่อเก็บของป่า ความประมาท เช่น การทิ้งก้นบุหรี่ การก่อกองไฟแล้วดับไม่สนิท การเผาขยะ และการวางเพลิงโดยเจตนา เป็นสาเหตุหลักของไฟป่าในประเทศไทย</p>
+              </div>
+              
+              <button class="cta-button">ดูข้อมูลเพิ่มเติม</button>
+          </div>
+      </section>
+      
+      <!-- Section 3: Effects -->
+      <section id="section3">
+          <div class="content">
+              <h2>ผลกระทบของไฟป่า</h2>
+              <p>ไฟป่าส่งผลกระทบรุนแรงต่อระบบนิเวศ สิ่งแวดล้อม เศรษฐกิจ และสุขภาพของมนุษย์ โดยปัญหาหนึ่งที่สำคัญคือ <span class="highlight">มลพิษทางอากาศ</span> ที่ส่งผลต่อสุขภาพของประชาชนในวงกว้าง</p>
+              
+              <div class="image-container">
+                  <img src="https://images.pexels.com/photos/266558/pexels-photo-266558.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="ผลกระทบของไฟป่า" />
+              </div>
+              
+              <div class="statistic">
+                  <div class="stat-item">
+                      <div class="stat-value">67%</div>
+                      <div class="stat-label">การสูญเสียความหลากหลายทางชีวภาพ</div>
+                  </div>
+                  <div class="stat-item">
+                      <div class="stat-value">300%</div>
+                      <div class="stat-label">การเพิ่มขึ้นของ PM2.5 ในช่วงไฟป่า</div>
+                  </div>
+                  <div class="stat-item">
+                      <div class="stat-value">5,000+</div>
+                      <div class="stat-label">ผู้ป่วยจากปัญหาทางเดินหายใจ</div>
+                  </div>
+              </div>
+              
+              <div class="fact-box">
+                  <h3>ผลกระทบต่อระบบนิเวศ</h3>
+                  <p>ไฟป่าทำลายถิ่นที่อยู่อาศัยของสัตว์ป่า ลดความหลากหลายทางชีวภาพ ทำลายโครงสร้างดิน เพิ่มการพังทลายของดิน และยังส่งผลต่อการเปลี่ยนแปลงสภาพภูมิอากาศจากการปล่อยก๊าซเรือนกระจก</p>
+              </div>
+              
+              <div class="fact-box">
+                  <h3>ผลกระทบต่อสุขภาพ</h3>
+                  <p>ฝุ่นละอองขนาดเล็ก PM2.5 จากไฟป่าส่งผลกระทบต่อระบบทางเดินหายใจ ทำให้เกิดโรคปอด โรคหัวใจ และส่งผลต่อสุขภาพจิตของประชาชนในพื้นที่ที่ได้รับผลกระทบ</p>
+              </div>
+              
+              <button class="cta-button">ดูผลกระทบเพิ่มเติม</button>
+          </div>
+      </section>
+      
+      <!-- Section 4: Risk Areas -->
+      <section id="section4">
+          <div class="content">
+              <h2>พื้นที่เสี่ยงไฟป่าในประเทศไทย</h2>
+              <p>พื้นที่เสี่ยงต่อการเกิดไฟป่าในประเทศไทย มักพบมากในภาคเหนือและภาคตะวันออกเฉียงเหนือ โดยเฉพาะในช่วงฤดูแล้ง <span class="highlight">เดือนมกราคมถึงเมษายน</span> ซึ่งเป็นช่วงที่มีอากาศแห้งและอุณหภูมิสูง</p>
+              
+              <div class="image-container">
+                  <img src="https://images.pexels.com/photos/5405596/pexels-photo-5405596.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="แผนที่พื้นที่เสี่ยงไฟป่า" />
+              </div>
+              
+              <div class="fact-box">
+                  <h3>พื้นที่เสี่ยงสูง</h3>
+                  <p>จังหวัดเชียงใหม่ เชียงราย แม่ฮ่องสอน ลำปาง ตาก และพื้นที่ภาคเหนือตอนบน รวมถึงพื้นที่อุทยานแห่งชาติและป่าสงวนที่มีการสะสมของเชื้อเพลิงตามธรรมชาติในปริมาณมาก</p>
+              </div>
+              
+              <div class="fact-box">
+                  <h3>ปัจจัยเสี่ยง</h3>
+                  <p>สภาพอากาศแห้ง อุณหภูมิสูง ความชื้นต่ำ ลมแรง การสะสมของเชื้อเพลิงในป่า (ใบไม้แห้ง กิ่งไม้) และกิจกรรมของมนุษย์ในพื้นที่ เป็นปัจจัยที่เพิ่มความเสี่ยงต่อการเกิดไฟป่า</p>
+              </div>
+              
+              <button class="cta-button">ดูพื้นที่เสี่ยงทั้งหมด</button>
+          </div>
+      </section>
+      
+      <!-- Section 5: Prevention -->
+      <section id="section5">
+          <div class="content">
+              <h2>การป้องกันไฟป่า</h2>
+              <p>การป้องกันไฟป่าต้องอาศัยความร่วมมือจากทุกภาคส่วน ทั้งภาครัฐ ภาคเอกชน และประชาชนทั่วไป ในการร่วมกันดูแลและป้องกันไม่ให้เกิดไฟป่า โดยเฉพาะในช่วงฤดูแล้ง <span class="highlight">การสร้างความตระหนักรู้และการมีส่วนร่วมของชุมชน</span> เป็นสิ่งสำคัญในการป้องกันไฟป่า</p>
+              
+              <div class="image-container">
+                  <img src="https://images.pexels.com/photos/8551700/pexels-photo-8551700.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="การป้องกันไฟป่า" />
+              </div>
+              
+              <div class="fact-box">
+                  <h3>มาตรการป้องกัน</h3>
+                  <p>การสร้างแนวกันไฟ การตัดแต่งและกำจัดเชื้อเพลิง การลาดตระเวนตรวจหาไฟป่า การติดตั้งกล้องวงจรปิดเพื่อเฝ้าระวัง และการสร้างเครือข่ายเฝ้าระวังไฟป่าในชุมชน เป็นมาตรการที่ช่วยในการป้องกันไฟป่า</p>
+              </div>
+              
+              <div class="fact-box">
+                  <h3>สิ่งที่ประชาชนทั่วไปทำได้</h3>
+                  <p>ไม่ทิ้งก้นบุหรี่ในพื้นที่ป่า ไม่ก่อกองไฟในพื้นที่เสี่ยง หลีกเลี่ยงการเผาขยะหรือวัชพืชในช่วงฤดูแล้ง แจ้งเบาะแสผู้ลักลอบเผาป่า และร่วมรณรงค์สร้างความตระหนักรู้เกี่ยวกับอันตรายของไฟป่า</p>
+              </div>
+              
+              <button class="cta-button">เรียนรู้วิธีป้องกัน</button>
+          </div>
+      </section>
+      
+      <!-- Section 6: Contact -->
+      <section id="section6">
+          <div class="content">
+              <h2>ติดต่อ</h2>
+              <p>มีข้อสงสัยไม่ต้องถามเพราะไม่มีช่องให้ถามคระบ</p>
+              
+              <div class="fact-box">
+                  <h3>ช่องทางการติดต่อ</h3>
+                  <p>หน่วยงานป้องกันไฟป่า: 1112<br>
+                  เหตุด่วนเหตุร้าย: 1112<br>
+                  อีเมล: Capuchino@assasino.com<br>
+                  เว็บไซต์: www.Brainrot god.go.th</p>
+              </div>
+              
+              <a href="QRCODE.html" class="cta-button">ลองกดดูครับเเล้วชีวิตจะเจอสิ่งดีๆเกิดขึ้น</a>
+          </div>
+      </section>
+      
+      <!-- Flame Icon -->
+      <i class="fas fa-fire" id="flame-icon"></i>
+      
+      <script>
+          document.addEventListener('DOMContentLoaded', function() {
+              // Mobile menu toggle
+              const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+              const mobileMenu = document.getElementById('mobileMenu');
+              
+              mobileMenuToggle.addEventListener('click', function() {
+                  mobileMenu.classList.toggle('active');
+                  if (mobileMenu.classList.contains('active')) {
+                      mobileMenuToggle.innerHTML = '<i class="fas fa-times"></i>';
+                  } else {
+                      mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                  }
+              });
+              
+              // Navigation link active state
+              const navLinks = document.querySelectorAll('.nav-link');
+              const sections = document.querySelectorAll('section');
+              
+              // Progress bar and scroll tracking
+              const progressBar = document.getElementById('progressBar');
+              const progressCircle = document.querySelector('.progress-ring-circle');
+              const progressText = document.querySelector('.progress-text');
+              const scrollIndicator = document.getElementById('scrollIndicator');
+              const fireContainer = document.getElementById('fireContainer');
+              const fireParticles = document.getElementById('fireParticles');
+              
+              const circleRadius = 20;
+              const circumference = 2 * Math.PI * circleRadius;
+              progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+              progressCircle.style.strokeDashoffset = circumference;
+              
+              // Create fire embers
+              function createEmbers() {
+                  const ember = document.createElement('div');
+                  ember.classList.add('ember');
+                  
+                  const startPosition = Math.random() * window.innerWidth;
+                  const endPosition = (Math.random() - 0.5) * 200;
+                  const rotation = Math.random() * 360;
+                  const duration = 3 + Math.random() * 4;
+                  
+                  ember.style.left = startPosition + 'px';
+                  ember.style.bottom = '-10px';
+                  ember.style.setProperty('--x-end', endPosition + 'px');
+                  ember.style.setProperty('--rotate-end', rotation + 'deg');
+                  ember.style.animation = `float-up ${duration}s linear forwards`;
+                  
+                  fireParticles.appendChild(ember);
+                  
+                  setTimeout(() => {
+                      ember.remove();
+                  }, duration * 1000);
+              }
+              
+              // Create embers at random intervals
+              setInterval(createEmbers, 100);
+              
+              // Handle scroll events
+              window.addEventListener('scroll', function() {
+                  const scrollPosition = window.scrollY;
+                  const windowHeight = window.innerHeight;
+                  const documentHeight = document.documentElement.scrollHeight - windowHeight;
+                  const scrolled = scrollPosition / documentHeight;
+                  
+                  // Update progress bar
+                  progressBar.style.width = (scrolled * 100) + '%';
+                  
+                  // Update progress circle
+                  const offset = circumference - (scrolled * circumference);
+                  progressCircle.style.strokeDashoffset = offset;
+                  progressText.textContent = Math.round(scrolled * 100) + '%';
+                  
+                  // Update fire container height (max 40vh)
+                  const fireHeight = Math.min(scrolled * 70, 40);
+                  fireContainer.style.height = fireHeight + 'vh';
+                  
+                  // Hide scroll indicator after scrolling
+                  if (scrollPosition > 100) {
+                      scrollIndicator.classList.add('hidden');
+                  } else {
+                      scrollIndicator.classList.remove('hidden');
+                  }
+                  
+                  // Update active section
+                  sections.forEach((section, index) => {
+                      const rect = section.getBoundingClientRect();
+                      const inViewport = rect.top <= windowHeight * 0.5 && rect.bottom >= windowHeight * 0.5;
+                      
+                      if (inViewport) {
+                          section.classList.add('active');
+                          
+                          // Update active nav link
+                          navLinks.forEach(link => link.classList.remove('active'));
+                          document.querySelector(`.nav-link[href="#${section.id}"]`).classList.add('active');
+                      }
+                  });
+              });
+              
+              // Scroll to section on nav link click
+              navLinks.forEach(link => {
+                  link.addEventListener('click', function(e) {
+                      e.preventDefault();
+                      const targetId = this.getAttribute('href');
+                      const targetSection = document.querySelector(targetId);
+                      
+                      window.scrollTo({
+                          top: targetSection.offsetTop - 80,
+                          behavior: 'smooth'
+                      });
+                      
+                      // Close mobile menu if open
+                      if (mobileMenu.classList.contains('active')) {
+                          mobileMenu.classList.remove('active');
+                          mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                      }
+                  });
+              });
+          });
+      </script>
+  </body>
+  </html>

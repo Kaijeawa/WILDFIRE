@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #000000;
+        }
+        
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeIn 1.0s ease forwards;
+            font-size: 48px;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px #0ff,
+                0 0 30px #0ff,
+                0 0 40px #0ff,
+                0 0 55px #0ff,
+                0 0 75px #0ff;
+            letter-spacing: 5px;
+        }
+        
+        .image-container {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.0s ease 0.5s forwards;
+        }
+        
+        img {
+            max-width: 350px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* เพิ่มเอฟเฟคกระพริบสำหรับนีออน */
+        @keyframes flicker {
+            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+                opacity: 1;
+            }
+            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+                opacity: 0.5;
+            }
+        }
+        
+        h1 {
+            animation: fadeIn 1.5s ease forwards, flicker 5s infinite alternate;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR CODE</h1>
+    <div class="image-container">
+        <img src="adwa.jpg" alt="QR Code">
+    </div>
+</body>
+</html>
